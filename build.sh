@@ -1,31 +1,36 @@
 #!/usr/bin/env bash
 set -e
 
-# Use your specified username and variables
-DOCKER_USER="${DOCKERHUB_USERNAME:-credkellar}"
+# Configuration using your exact username and token variables
+DOCKER_USER="credkellar"
 IMAGE_NAME="hub-docker-pdf-project-tree"
 TAG="latest"
+FULL_IMAGE_NAME="${DOCKER_USER}/${IMAGE_NAME}:${TAG}"
 
-echo "==> Preparing build environment for ${DOCKER_USER}/${IMAGE_NAME}:${TAG}..."
+echo "==> Preparing build for ${FULL_IMAGE_NAME}..."
 
-# 1. Ensure internal script permissions
-chmod +x scripts/*.sh
-
-# 2. Authenticate with Docker Hub using DOCKERHUB_TOKEN
+# 1. Verify token is present
 if [ -z "$DOCKERHUB_TOKEN" ]; then
     echo "Error: DOCKERHUB_TOKEN environment variable is missing."
+    echo "Run: export DOCKERHUB_TOKEN='your_token_here'"
     exit 1
 fi
 
+# 2. Authenticate with Docker Hub
+echo "==> Authenticating with Docker Hub..."
 echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 
-# 3. Setup Buildx builder instance
-docker buildx create --use --name pdf_builder || docker buildx use pdf_builder
+# 3. Set permissions if scripts folder exists
+if [ -d "scripts" ]; then
+    chmod +x scripts/*.sh
+fi
 
-# 4. Build and push using the correct tag
-docker buildx build \
-  --tag "${DOCKER_USER}/${IMAGE_NAME}:${TAG}" \
-  --push \
-  .
+# 4. Build the Docker image standardly
+echo "==> Building image..."
+docker build -t "$FULL_IMAGE_NAME" .
 
-echo "==> Successfully built and pushed ${DOCKER_USER}/${IMAGE_NAME}:${TAG}!"
+# 5. Push the image to get your green check
+echo "==> Pushing image to Docker Hub..."
+docker push "$FULL_IMAGE_NAME"
+
+echo "==> SUCCESS: ${FULL_IMAGE_NAME} pushed successfully!"
