@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  tree-generator:
+    build: .
+    container_name: hub-docker-pdf-generator
+    environment:
+      - DOCKER_TARGET_IMAGE=library/ubuntu:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./output:/app/output
+      - ./logs:/app/logs
+      
