@@ -12,7 +12,7 @@ echo "==> Preparing build for ${FULL_IMAGE_NAME}..."
 # 1. Verify token is present
 if [ -z "$DOCKERHUB_TOKEN" ]; then
     echo "Error: DOCKERHUB_TOKEN environment variable is missing."
-    echo "Run: export DOCKERHUB_TOKEN='your_token_here'"
+    echo "Run: export DOCKERHUB_TOKEN='dckr_pat_fWl1Np-vXb99ZPVz9ZWBV_ExMSE'"
     exit 1
 fi
 
