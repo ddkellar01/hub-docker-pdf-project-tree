@@ -38,7 +38,7 @@ Have you ever tried to look inside a pre-made computer app and gotten totally lo
    ```bash
    bash scripts/25_audit_permissions.sh
 
-————————————————————————————————————————————————
+—————————————————————————————————
    hub-docker-pdf-project-tree/
 ├── .github/
 │   └── workflows/
