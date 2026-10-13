@@ -1,0 +1,8 @@
+.git
+.github
+extracted-fs/
+filtered-pdf-fs/
+output/
+logs/
+*.tar
+*.tar.gz
