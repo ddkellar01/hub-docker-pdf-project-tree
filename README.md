@@ -1,4 +1,5 @@
-!(IMG_4989.jpeg)
+![Cover Pic](IMG_4989.jpeg)
+)
 
 ## hub-docker-pdf-project-tree
 
