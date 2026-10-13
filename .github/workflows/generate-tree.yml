@@ -1,4 +1,4 @@
-name: Generate Docker PDF Project Treei
+name: Generate Docker PDF Project Tree
 
 on:
   push:
