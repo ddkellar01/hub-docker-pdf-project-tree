@@ -1,0 +1,2 @@
+# Standard library is primarily used; add external testing or utility packages here if needed.
+pytest>=7.0.0
